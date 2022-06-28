@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>SpeedChat login</title>
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/remixicon.css">
+</head>
+<body>
+	<form class="form-login">
+		<h1>ورود کاربران</h1>
+		<div class="input-block">
+			<div class="block">
+				<input class="input" placeholder=" " id="username" dir="ltr">
+				<span class="placeholder">نام‌کاربری</span>
+			</div>
+		</div>
+		<div class="input-block">
+			<div class="block">
+				<input class="input" placeholder=" " id="password" type="password"
+					onkeyup="event.keyCode == 13 && document.getElementById('login-button').click()">
+				<span class="placeholder">پسورد</span>
+				<i class="ri-eye-line" id="toggle-password" onclick="togglePassword(this)"></i>
+			</div>
+		</div>
+		<button type="button" class="primary" onclick="login()" id="login-button">ورود</button>
+	</form>
+	
+	<div id="snackbar"></div>
+	
+	<script src="js/jquery.js"></script>
+	<script src="js/axios.js"></script>
+	<script src="js/function.js"></script>
+	<script src="js/login.js"></script>
+</body>
+</html>

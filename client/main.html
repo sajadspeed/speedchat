@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>SpeedChat</title>
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/remixicon.css">
+</head>
+<body>
+	<aside>
+		<header>
+			<div class="profile-container">
+				<input type="file" accept=".jpg,.jpeg,.png,.gif,.bmp,.webp" name="image" id="profile-input" style="display: none;">
+				<img src="image/profile.png" class="profile-big" id="image-profile">
+				<i class="ri-edit-2-line edit-badge" onclick="openFileInput('profile-input')"></i>
+			</div>
+			<span class="username" id="username">username</span>
+			<a href="#user-add"><i class="ri-add-fill icon-edit"></i></a>
+		</header>
+		<div id="contacts">
+		</div>
+	</aside>
+	<main>
+		<header>
+			<div class="right">
+				<i class="ri-wechat-line"></i>
+				<span>گفت‌و‌گو با <span id="username-text"></span></span>
+			</div>
+			<div class="left">
+				<i class="ri-more-2-line" onclick="optionsMenuToggle()"></i>
+				<div class="options-menu" id="options-menu">
+					<div class="item" onclick="clearMessages()"><span>پاکسازی پیام‌ها</span></div>
+					<div class="item" onclick="clearContact()"><span>حذف مخاطب</span></div>
+				</div>
+				<i class="ri-video-chat-line" onclick="videoCallRequest()"></i>
+			</div>
+		</header>
+		<div class="chats" id="chats">
+		</div>
+		<div class="input-container">
+			<input type="text" placeholder="پیام خود را تایپ کنید..." id="message">
+			<div class="actions">
+				<input type="file" style="display: none;" id="file-upload">
+				<i class="ri-attachment-line" onclick="selectFileToUpload()"></i>
+				<i class="ri-send-plane-2-line send-button" onclick="sendMessage()"></i>
+			</div>
+		</div>
+	</main>
+	
+	<div class="start-chat" id="start-chat">
+		<img src="image/chat.png">
+		<h1>SpeedChat</h1>
+		<h3>گفت‌وگو و تماس، سریع، آسان، مطمئن</h3>
+	</div>
+	
+	<div id="user-add" class="modal">
+		<div class="modal__content">
+			<input type="text" id="input-username-search" placeholder="نام کاربری را جست‌وجو کنید..." onkeyup="userAddSearch()">
+			<div class="users-list" id="search-users-list">
+			</div>
+			
+			<a href="#" class="modal__close">&times;</a>
+		</div>
+	</div>
+	
+	<div class="call-request" id="call-request">
+		<img src="image/profile.png" id="call-request-image">
+		<span class="username" id="call-request-username">sajadspeed</span>
+		<h3>در حال برقراری تماس</h3>
+		<div class="button-call red" onclick="callRequestReject(true)">
+			<i class="ri-close-line"></i>
+		</div>
+	</div>
+	
+	<div class="call-answer" id="call-answer">
+		<div class="container">
+			<img src="image/profile.png" id="call-answer-image">
+			<span class="username" id="call-answer-username">sajadspeed</span>
+			<div class="button-container">
+				<div class="button-call red" onclick="callRequestReject()">
+					<i class="ri-close-line"></i>
+				</div>
+				
+				<div class="button-call green" onclick="callAnswer()">
+					<i class="ri-phone-line"></i>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="call" id="call">
+		<video class="video-remote" id="video-remote" autoplay></video>
+		<video class="video-me" id="video-me" autoplay muted></video>
+		
+		<div class="button-call gray button-minimize" onclick="callMinimize(true)">
+			<i class="ri-fullscreen-exit-line"></i>
+		</div>
+		
+		<div class="button-container">
+			<div class="button-call blue" onclick="callWebcamToggle(this)">
+				<i class="ri-camera-line" id="webcam-icon"></i> <!-- ri-camera-off-line -->
+			</div>
+			
+			<div class="button-call blue" onclick="callMicToggle(this)">
+				<i class="ri-mic-line" id="mic-icon"></i> <!-- ri-mic-off-line -->
+			</div>
+			
+			<div class="button-call red" onclick="callFinish()">
+				<i class="ri-close-line"></i>
+			</div>
+		</div>
+	</div>
+	
+	<div class="call-minimize" onclick="callMinimize(false)" id="call-minimize-button">
+		<i class="ri-live-line"></i>
+		<span>تماس تصویری</span>
+	</div>
+	
+	<div id="snackbar"></div>
+	
+	<script src="js/peerjs.min.js"></script>
+	<script src="js/jquery.js"></script>
+	<script src="js/axios.js"></script>
+	<script src="js/socket.io.min.js"></script>
+	<script src="js/jalaali.min.js"></script>
+	<script src="js/function.js"></script>
+	<script src="js/main.js"></script>
+</body>
+</html>
